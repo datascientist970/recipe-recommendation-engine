@@ -1,50 +1,81 @@
-# recipe-recommendation-engine
+# Recipe Recommendation Engine
 
-A web application that provides intelligent recipe search and recommendations using semantic similarity matching. The system allows users to find recipes using natural language queries and view detailed cooking instructions.
+> A semantic recipe search engine that understands what you're craving — not just what you're typing.
+
+![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)
+![Django](https://img.shields.io/badge/Django-Web%20App-092E20?logo=django&logoColor=white)
+![Sentence Transformers](https://img.shields.io/badge/Sentence%20Transformers-Embeddings-blue)
+![Cosine Similarity](https://img.shields.io/badge/Ranking-Cosine%20Similarity-green)
+
+## Overview
+
+Most recipe sites only match keywords: type "chicken" and you get every title containing the word. The Recipe Recommendation Engine instead uses **semantic search** — your natural-language query ("quick vegetarian dinner", "chocolate dessert for a party") is converted into an embedding and compared against pre-computed recipe embeddings, so results are ranked by *meaning*, not by exact words.
+
+The system returns the 10 most relevant recipes, each with a full detail page: ingredients, step-by-step instructions and an image.
 
 ## Key Features
 
-- **Semantic Search**: Find recipes by describing what you want in natural language (e.g., "quick vegetarian dinner" or "chocolate dessert for parties")
-- **Smart Recommendations**: Get the 10 most relevant recipes based on your query
-- **Complete Recipe Details**: View ingredients, step-by-step instructions, and images for each recipe
-- **Fast Performance**: Pre-computed embeddings enable quick search results
-- **Clean Interface**: Simple, intuitive user interface for searching and browsing
+- **Semantic search** — describe a craving, a mood, an occasion or dietary need in plain language
+- **Smart recommendations** — top-10 recipes ranked by cosine similarity to the query embedding
+- **Complete recipe details** — ingredients, detailed cooking instructions and images on every result
+- **Fast search** — recipe embeddings are pre-computed, so queries are answered by vector comparison rather than re-processing the dataset
+- **Clean interface** — a simple, intuitive search UI with AJAX-driven dynamic results
 
 ## How It Works
 
-### Search Process
-1. **Query Processing**: Your search query is cleaned and converted to a numerical representation (embedding) using a machine learning model
-2. **Similarity Matching**: The system compares your query against thousands of pre-computed recipe embeddings
-3. **Ranking**: Recipes are sorted by relevance using cosine similarity
-4. **Results Display**: The top 10 most relevant recipes are displayed with titles and images
+1. **Query processing** — the user's query is cleaned and converted into a numerical embedding with a Sentence Transformers model.
+2. **Similarity matching** — the query embedding is compared with thousands of pre-computed recipe embeddings.
+3. **Ranking** — recipes are sorted by cosine similarity to the query.
+4. **Results** — the top 10 recipes are displayed with titles and images; each links to a full detail page.
 
-### Recipe Details
-Each recipe page provides:
-- Recipe title and image
-- Complete ingredient list
-- Detailed cooking instructions
-- Clean, readable formatting
+## Tech Stack
 
-## Technology Stack
+- **Backend:** Django (Python)
+- **Machine Learning:** Sentence Transformers (text embeddings)
+- **Ranking:** Cosine similarity
+- **Frontend:** HTML templates with AJAX for dynamic search
+- **Data Processing:** Python-based preprocessing and embedding generation
 
-- **Backend Framework**: Django for web application structure
-- **Machine Learning**: Sentence Transformers for semantic understanding
-- **Similarity Matching**: Cosine similarity for relevance ranking
-- **Data Processing**: Efficient data handling and preprocessing
-- **Frontend**: HTML templates with AJAX for dynamic search
+## Project Structure
 
-## Benefits
+```text
+recipe-recommendation-engine/
+└── README.md   # Project documentation (design & system description)
+```
 
-- **Intuitive Searching**: No need to know exact recipe names - describe what you want
-- **Relevant Results**: Finds recipes conceptually similar to your query, not just keyword matches
-- **Time-Saving**: Quickly discover recipes that match your needs and preferences
-- **Comprehensive Information**: All recipe details in one place for easy cooking
+> Note: this repository currently publishes the project's design and system documentation. The application follows a standard Django layout — a Django project with a search view that embeds the query, ranks recipes by cosine similarity against pre-computed embeddings, and renders result/detail templates via AJAX.
 
-## Potential Applications
+## Getting Started
 
-- **Home Cooks**: Discover new recipes based on available ingredients or cravings
-- **Meal Planning**: Find recipes matching specific dietary requirements or time constraints
-- **Learning to Cook**: Explore recipes by describing desired outcomes
-- **Content Discovery**: Browse recipes by mood, occasion, or flavor profile
+For a standard Django deployment of this design:
 
-This system bridges the gap between how people naturally describe food and structured recipe databases, making recipe discovery more intuitive and effective.
+```bash
+git clone https://github.com/datascientist970/recipe-recommendation-engine.git
+cd recipe-recommendation-engine
+pip install django sentence-transformers pandas numpy scikit-learn
+python manage.py runserver
+```
+
+Then open `http://127.0.0.1:8000/` and search in natural language.
+
+## Usage
+
+Try queries such as:
+
+- *"quick vegetarian dinner"*
+- *"chocolate dessert for parties"*
+- *"healthy breakfast with eggs"*
+
+Select any result to view its ingredients and step-by-step cooking instructions.
+
+## Who Is It For?
+
+- **Home cooks** discovering recipes from available ingredients or cravings
+- **Meal planners** matching dietary requirements or time constraints
+- **Cooking learners** exploring dishes by desired outcome, mood or occasion
+
+## Author
+
+**Muhammad Dawood** — AI & Data Science Engineer
+GitHub: https://github.com/datascientist970 · Mardan, Pakistan
+LinkedIn: https://www.linkedin.com/in/dawood406/
